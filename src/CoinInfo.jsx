@@ -8,6 +8,7 @@ function CoinInfo() {
         <Row>
           <Col>Logo</Col>
           <Col>Bitcoin</Col>
+          <Col>Bitcoin</Col>
         </Row>
       </Col>
       <Col>

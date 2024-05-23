@@ -24,6 +24,11 @@ function CoinList() {
           <tr onClick={() => setShowInfoModal(true)}>
             <td>1</td>
             <td>Bitcoin</td>
+            <td>Bitcoin</td>
+            <td>Bitcoin</td>
+            <td>Bitcoin</td>
+            <td>Bitcoin</td>
+            <td>Bitcoin</td>
             <td>680000</td>
             <td>XXXXX</td>
             <td>XXXXX</td>
