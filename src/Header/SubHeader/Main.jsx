@@ -6,8 +6,8 @@ function Main({ data }) {
   return (
     <Container>
       <Row>
-        {data.map(({ children }) => (
-          <Col>{children}</Col>
+        {data.map(({ children }, index) => (
+          <Col key={index}>{children}</Col>
         ))}
       </Row>
     </Container>
