@@ -4,11 +4,15 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 
-function Navigation({ setShowSideBar }) {
+function Navigation({ setShowSideBar, setPage }) {
+  const handleClick = () => {
+    setPage("main");
+  };
+
   return (
     <Navbar className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="#home" onClick={handleClick}>
           <img
             alt=""
             src="https://react-bootstrap.netlify.app/img/logo.svg"
@@ -19,7 +23,9 @@ function Navigation({ setShowSideBar }) {
           React Bootstrap
         </Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
+          <Nav.Link href="#home" onClick={handleClick}>
+            Home
+          </Nav.Link>
           <Nav.Link href="#link">Link</Nav.Link>
           <NavDropdown title="Dropdown" id="basic-nav-dropdown">
             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
