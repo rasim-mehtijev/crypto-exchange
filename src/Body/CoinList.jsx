@@ -1,15 +1,22 @@
 import React from "react";
 import Table from "react-bootstrap/Table";
 import CoinInfoModal from "./CoinInfo/CoinInfoModal";
+import { getAssets } from "../api/assets";
+import { coinDataFormat } from "./utils";
 
 function CoinList({ setPage }) {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [coinData, setCoinData] = React.useState({});
+  const [coinList, setCoinList] = React.useState([]);
 
-  const handleOnClick = (name) => {
+  const handleOnClick = (coin) => {
     setShowInfoModal(true);
-    setCoinData({ name });
+    setCoinData(coin);
   };
+
+  React.useEffect(() => {
+    getAssets().then((json) => setCoinList(json.data));
+  }, []);
 
   return (
     <>
@@ -27,16 +34,21 @@ function CoinList({ setPage }) {
           </tr>
         </thead>
         <tbody>
-          <tr onClick={() => handleOnClick("Bitcoin")}>
-            <td>1</td>
-            <td>Bitcoin</td>
-            <td>680000</td>
-            <td>XXXXX</td>
-            <td>XXXXX</td>
-            <td>XXXXX</td>
-            <td>XXXXX</td>
-            <td>XXXXX</td>
-          </tr>
+          {coinList.map((coin) => {
+            const formatedCoin = coinDataFormat(coin);
+            return (
+              <tr key={formatedCoin.id} onClick={() => handleOnClick(coin)}>
+                <td>{formatedCoin.rank}</td>
+                <td>{formatedCoin.name}</td>
+                <td>{formatedCoin.priceUsd}</td>
+                <td>{formatedCoin.marketCapUsd}</td>
+                <td>{formatedCoin.vwap24Hr}</td>
+                <td>{formatedCoin.supply}</td>
+                <td>{formatedCoin.volumeUsd24Hr}</td>
+                <td>{formatedCoin.changePercent24Hr}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </Table>
       <CoinInfoModal
