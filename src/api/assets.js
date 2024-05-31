@@ -6,10 +6,14 @@ export const getAssets = async () => {
   return await response.json();
 };
 
-export const getAssetsHistory = async (id, interval) => {
-  const response = await fetch(
-    `${apiUrl}/assets/${id}/history?interval=${interval}`
-  );
+export const getAssetsHistory = async (id, interval, start, end) => {
+  const params = new URLSearchParams({
+    interval,
+    start,
+    end,
+  });
+
+  const response = await fetch(`${apiUrl}/assets/${id}/history?${params}`);
 
   return await response.json();
 };
