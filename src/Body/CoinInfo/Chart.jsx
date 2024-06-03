@@ -13,21 +13,25 @@ import { periods } from "./constants";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { buildPeriod, parseTime } from "./utils";
+import ErrorModal from "../../ErrorModal";
 
 function Chart({ coinData }) {
   const [period, setPeriod] = React.useState(periods[0]);
   const [chartData, setChartData] = React.useState([]);
+  const [errorMessage, setErrorMessage] = React.useState(null);
 
   React.useEffect(() => {
     const { start, end } = buildPeriod(period);
-    getAssetsHistory(coinData.id, period.interval, start, end).then((json) =>
-      setChartData(
-        json.data.map(({ time, ...rest }) => ({
-          ...rest,
-          date: parseTime(time),
-        }))
+    getAssetsHistory(coinData.id, period.interval, start, end)
+      .then((json) =>
+        setChartData(
+          json.data.map(({ time, ...rest }) => ({
+            ...rest,
+            date: parseTime(time, period.dateFormat),
+          }))
+        )
       )
-    );
+      .catch((error) => setErrorMessage(error.message));
   }, [coinData.id, period]);
 
   return (
@@ -46,7 +50,7 @@ function Chart({ coinData }) {
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
-          <YAxis />
+          <YAxis domain={["dataMin", "dataMax"]} />
           <Tooltip />
           <Area
             type="monotone"
@@ -68,6 +72,11 @@ function Chart({ coinData }) {
           </Button>
         ))}
       </ButtonGroup>
+      <ErrorModal
+        show={!!errorMessage}
+        handleClose={() => setErrorMessage(null)}
+        errorMessage={errorMessage}
+      />
     </>
   );
 }
