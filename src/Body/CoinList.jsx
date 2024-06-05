@@ -4,6 +4,7 @@ import CoinInfoModal from "./CoinInfo/CoinInfoModal";
 import { getAssets } from "../api/assets";
 import { coinDataFormat } from "./utils";
 import ErrorModal from "../ErrorModal";
+import Number from "../Number";
 
 function CoinList({ setPage }) {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
@@ -44,12 +45,22 @@ function CoinList({ setPage }) {
               <tr key={formatedCoin.id} onClick={() => handleOnClick(coin)}>
                 <td>{formatedCoin.rank}</td>
                 <td>{formatedCoin.name}</td>
-                <td>{formatedCoin.priceUsd}</td>
-                <td>{formatedCoin.marketCapUsd}</td>
-                <td>{formatedCoin.vwap24Hr}</td>
-                <td>{formatedCoin.supply}</td>
-                <td>{formatedCoin.volumeUsd24Hr}</td>
-                <td>{formatedCoin.changePercent24Hr}</td>
+                <td>
+                  <Number value={formatedCoin.priceUsd} />
+                </td>
+                <td>
+                  <Number value={formatedCoin.marketCapUsd} />
+                </td>
+                <td>
+                  <Number value={formatedCoin.vwap24Hr} />
+                </td>
+                <td>
+                  <Number value={formatedCoin.supply} />
+                </td>
+                <td>
+                  <Number value={formatedCoin.volumeUsd24Hr} />
+                </td>
+                <td>{formatedCoin.changePercent24Hr}%</td>
               </tr>
             );
           })}
