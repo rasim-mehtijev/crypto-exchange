@@ -5,6 +5,7 @@ import Chart from "./Chart";
 import { getAssetsById } from "../../api/assets";
 import "./coinInfo.css";
 import ErrorModal from "../../ErrorModal";
+import Number from "../../Number";
 
 function CoinInfo({ coinData }) {
   const [coinInfo, setCoinInfo] = React.useState({});
@@ -33,7 +34,9 @@ function CoinInfo({ coinData }) {
           <div>Low 670000</div>
         </Col>
         <Col>
-          <div>Avarage {coinInfo.vwap24Hr}</div>
+          <div>
+            Avarage <Number value={coinInfo.vwap24Hr} />
+          </div>
           <div>Change {coinInfo.changePercent24Hr}%</div>
         </Col>
       </Row>
