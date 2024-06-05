@@ -15,10 +15,19 @@ import ButtonGroup from "react-bootstrap/ButtonGroup";
 import { buildPeriod, parseTime } from "./utils";
 import ErrorModal from "../../ErrorModal";
 
-function Chart({ coinData }) {
+function Chart({ coinData, periodParams }) {
   const [period, setPeriod] = React.useState(periods[0]);
   const [chartData, setChartData] = React.useState([]);
   const [errorMessage, setErrorMessage] = React.useState(null);
+
+  React.useEffect(() => {
+    if (periodParams) {
+      const _period = periods.find(({ label }) => label === periodParams);
+      if (_period) {
+        setPeriod(_period);
+      }
+    }
+  }, [periodParams]);
 
   React.useEffect(() => {
     const { start, end } = buildPeriod(period);
