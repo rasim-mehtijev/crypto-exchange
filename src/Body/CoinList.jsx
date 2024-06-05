@@ -6,7 +6,7 @@ import { coinDataFormat } from "./utils";
 import ErrorModal from "../ErrorModal";
 import Number from "../Number";
 
-function CoinList({ setPage }) {
+function CoinList() {
   const [showInfoModal, setShowInfoModal] = React.useState(false);
   const [coinData, setCoinData] = React.useState({});
   const [coinList, setCoinList] = React.useState([]);
@@ -70,7 +70,6 @@ function CoinList({ setPage }) {
         show={showInfoModal}
         setShow={setShowInfoModal}
         coinData={coinData}
-        setPage={setPage}
       />
       <ErrorModal
         show={!!errorMessage}

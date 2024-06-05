@@ -4,16 +4,13 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Button from "react-bootstrap/Button";
 import Offcanvas from "react-bootstrap/Offcanvas";
+import { Link } from "react-router-dom";
 
-function Navigation({ setShowSideBar, setPage }) {
-  const handleClick = () => {
-    setPage("main");
-  };
-
+function Navigation({ setShowSideBar }) {
   return (
     <Navbar expand="md" className="bg-body-tertiary">
       <Container fluid>
-        <Navbar.Brand href="#home" onClick={handleClick}>
+        <Link to="/" className="navbar-brand">
           <img
             alt=""
             src="https://react-bootstrap.netlify.app/img/logo.svg"
@@ -22,7 +19,7 @@ function Navigation({ setShowSideBar, setPage }) {
             className="d-inline-block align-top"
           />{" "}
           React Bootstrap
-        </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls={`offcanvasNavbar-expand`} />
         <Navbar.Offcanvas
           id={`offcanvasNavbar-expand`}
@@ -36,9 +33,9 @@ function Navigation({ setShowSideBar, setPage }) {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="flex-grow-1 pe-3 my-auto">
-              <Nav.Link href="#home" onClick={handleClick}>
+              <Link to="/" className="nav-link">
                 Home
-              </Nav.Link>
+              </Link>
               <Nav.Link href="#link">Link</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
