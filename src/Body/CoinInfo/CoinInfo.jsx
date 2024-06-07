@@ -5,11 +5,15 @@ import Chart from "./Chart";
 import { getAssetsById } from "../../api/assets";
 import "./coinInfo.css";
 import ErrorModal from "../../ErrorModal";
-import Number from "../../Number";
+import PriceTag from "../../PriceTag";
 import { useParams } from "react-router-dom";
 
 function CoinInfo({ coinData }) {
   const [coinInfo, setCoinInfo] = React.useState({});
+  const [priceHL, setPriceHL] = React.useState({
+    high: 0,
+    low: 0,
+  });
   const [errorMessage, setErrorMessage] = React.useState(null);
 
   const { id, period } = useParams();
@@ -33,18 +37,26 @@ function CoinInfo({ coinData }) {
           </Row>
         </Col>
         <Col>
-          <div>High 700000</div>
-          <div>Low 670000</div>
+          <div>
+            High <PriceTag value={priceHL.high} />
+          </div>
+          <div>
+            Low <PriceTag value={priceHL.low} />
+          </div>
         </Col>
         <Col>
           <div>
-            Avarage <Number value={coinInfo.vwap24Hr} />
+            Avarage <PriceTag value={coinInfo.vwap24Hr} />
           </div>
           <div>Change {coinInfo.changePercent24Hr}%</div>
         </Col>
       </Row>
       <Row>
-        <Chart coinData={coinData || { id }} periodParams={period} />
+        <Chart
+          coinData={coinData || { id }}
+          periodParams={period}
+          setPriceHL={setPriceHL}
+        />
       </Row>
       <ErrorModal
         show={!!errorMessage}

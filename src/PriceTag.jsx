@@ -1,6 +1,6 @@
 import { NumericFormat } from "react-number-format";
 
-const Number = ({ value }) => (
+const PriceTag = ({ value }) => (
   <NumericFormat
     value={value}
     displayType={"text"}
@@ -10,4 +10,4 @@ const Number = ({ value }) => (
   />
 );
 
-export default Number;
+export default PriceTag;
