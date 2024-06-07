@@ -36,7 +36,9 @@ function Navigation({ setShowSideBar }) {
               <Link to="/" className="nav-link">
                 Home
               </Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Link to="/contact" className="nav-link">
+                Contact
+              </Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
