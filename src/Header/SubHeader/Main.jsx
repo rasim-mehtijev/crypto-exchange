@@ -3,6 +3,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 
 function Main({ data }) {
+  console.log('Main');
   return (
     <Container>
       <Row>
