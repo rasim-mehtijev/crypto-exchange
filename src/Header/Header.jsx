@@ -4,6 +4,7 @@ import { mainSubHeader } from "./SubHeader/constants";
 import { useMatch } from "react-router-dom";
 
 function Header(props) {
+  console.log('Header');
   const match = useMatch("/");
 
   return (

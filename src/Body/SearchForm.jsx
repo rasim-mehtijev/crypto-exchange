@@ -5,6 +5,7 @@ import { periods } from "./CoinInfo/constants";
 import { useNavigate } from "react-router-dom";
 
 function SearchForm({ closeSideBar }) {
+  console.log('SearchForm');
   const navigate = useNavigate();
 
   const handleOnSubmit = (event) => {

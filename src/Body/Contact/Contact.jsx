@@ -1,4 +1,5 @@
 function Contact() {
+  console.log('Contact');
   return (
     <>
       <div>Contact page</div>
