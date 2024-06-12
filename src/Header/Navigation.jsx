@@ -1,3 +1,4 @@
+import React from "react";
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
@@ -7,9 +8,13 @@ import Offcanvas from "react-bootstrap/Offcanvas";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setShowSideBar } from "../service/state";
+import Form from "react-bootstrap/Form";
+import { AppContext } from "../providers/AppProvider";
 
 function Navigation() {
-  console.log('Navigation');
+  console.log("Navigation");
+
+  const appContext = React.useContext(AppContext);
 
   const dispatch = useDispatch();
 
@@ -59,7 +64,17 @@ function Navigation() {
                 </NavDropdown.Item>
               </NavDropdown>
             </Nav>
-            <Navbar.Text className="justify-content-end d-flex">
+            <Navbar.Text className="justify-content-end d-flex align-items-center">
+              <Form.Check
+                type="switch"
+                id="custom-switch"
+                label="Highlights"
+                className="me-2"
+                checked={appContext.switchHighLights}
+                onChange={() =>
+                  appContext.setSwitchHighLights((oldValue) => !oldValue)
+                }
+              />
               <Button
                 onClick={() => dispatch(setShowSideBar(true))}
                 variant="primary"
