@@ -12,12 +12,12 @@ import { getAssetsHistory } from "../../api/assets";
 import { periods } from "./constants";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
-import { buildPeriod, parseTime } from "./utils";
+import { buildPeriod, parseTime, formatTick, sortPrice } from "./utils";
 import { useDispatch } from "react-redux";
 import { setErrorMessage } from "../../service/state";
 
-function Chart({ coinData, periodParams, setPriceHL }) {
-  console.log('Chart');
+function Chart({ coinData, periodParams, setPriceHL, priceHL }) {
+  console.log("Chart");
   const [period, setPeriod] = React.useState(periods[0]);
   const [chartData, setChartData] = React.useState([]);
   const dispatch = useDispatch();
@@ -42,19 +42,11 @@ function Chart({ coinData, periodParams, setPriceHL }) {
           }))
         );
 
-        const pricesHL = json.data.sort((a, b) => {
-          if (a.priceUsd > b.priceUsd) {
-            return 1;
-          }
-          if (a.priceUsd < b.priceUsd) {
-            return -1;
-          }
-          return 0;
-        });
+        const pricesHL = json.data.sort(sortPrice);
 
         setPriceHL({
-          low: pricesHL[0].priceUsd,
-          high: pricesHL[pricesHL.length - 1].priceUsd,
+          low: formatTick(pricesHL[0].priceUsd),
+          high: formatTick(pricesHL[pricesHL.length - 1].priceUsd),
         });
       })
       .catch((error) => dispatch(setErrorMessage(error.message)));
@@ -77,11 +69,11 @@ function Chart({ coinData, periodParams, setPriceHL }) {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
           <YAxis
-            domain={["auto", "auto"]}
+            domain={[() => priceHL.low, () => priceHL.high]}
             orientation="right"
             mirror
             tickLine={false}
-            tickFormatter={(value) => `${value.toFixed(2)}`}
+            tickFormatter={(value) => formatTick(value)}
           />
           <Tooltip />
           <Area

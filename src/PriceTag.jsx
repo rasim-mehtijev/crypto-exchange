@@ -8,7 +8,7 @@ const PriceTag = ({ value }) => {
       displayType={"text"}
       thousandSeparator
       prefix={"$"}
-      decimalScale={2}
+      decimalScale={10}
     />
   );
 };
