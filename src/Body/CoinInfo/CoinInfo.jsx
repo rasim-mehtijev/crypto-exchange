@@ -59,6 +59,7 @@ function CoinInfo({ coinData }) {
           coinData={coinData || { id }}
           periodParams={period}
           setPriceHL={setPriceHL}
+          priceHL={priceHL}
         />
       </Row>
     </>
